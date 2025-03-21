@@ -26,6 +26,7 @@ export RNA_HOME=/data/results/sandeep/practical/rna
 export RNA_REFS_DIR=/data/results/sandeep/practical/rna/ref
 export RNA_DATA_DIR=/data/results/sandeep/practical/rna/rawdata
 export RNA_DATA_TRIM_DIR=/data/results/sandeep/practical/rna/trim
+export DE=/data/results/sandeep/practical/rna/DE
 
 cd cd $RNA_HOME
 export S1=UHR_Rep1_ERCC-Mix1_Build37-ErccTranscripts-chr22
@@ -46,3 +47,8 @@ fastp -i $RNA_DATA_DIR/$S5.read1.fastq.gz -I $RNA_DATA_DIR/$S5.read2.fastq.gz -o
 
 export S6=HBR_Rep3_ERCC-Mix2_Build37-ErccTranscripts-chr22
 fastp -i $RNA_DATA_DIR/$S6.read1.fastq.gz -I $RNA_DATA_DIR/$S6.read2.fastq.gz -o $RNA_DATA_TRIM_DIR/$S6.read1.fastq.gz -O $RNA_DATA_TRIM_DIR/$S6.read2.fastq.gz -l 25 --adapter_fasta $RNA_REFS_DIR/illumina_multiplex.fa --trim_front1 13 --trim_front2 13 --json $RNA_DATA_TRIM_DIR/$S6.fastp.json --html $RNA_DATA_TRIM_DIR/$S6.fastp.html 2>$RNA_DATA_TRIM_DIR/$S6.fastp.log
+
+# Counting from bam files
+# Replace the names with the names of generated bam files
+# Example of multiple bam files
+featureCounts -p -t exon -g gene_id -a "$RNA_REFS_DIR"/chr22_with_ERCC92.gtf -o {$DE}/counts.txt P1-D0.bam P1-D7COC.bam P1-D7EV.bam P1-D14COC.bam P2-D0.bam P2-D7COC.bam P2-D7EV.bam P3-D0.bam P3-D7COC.bam P3-D7EV.bam P3-D14COC.bam
