@@ -1,0 +1,7 @@
+Sample	Group
+HBR_Rep1.bam	control
+HBR_Rep2.bam	control
+HBR_Rep3.bam	control
+UHR_Rep1.bam	test
+UHR_Rep2.bam	test
+UHR_Rep3.bam	test
